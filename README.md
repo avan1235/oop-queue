@@ -25,6 +25,8 @@ the documentation from the parent class).
 In your code you can also add new methods to different queue classes as you did in your queue diagram model - name them
 property, and then they won't even need any documentation 😉
 
+You have time until the end of 09.04.2022
+
 ## Extra notes
 
 1. If you want to run your code, and you don't use the IDE that provides magic green buttons for running
