@@ -3,7 +3,9 @@ package pl.edu.mimuw.queue;
 public abstract class AbstractIntQueue {
 
   // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed
+  //  but also add some methods but the specified methods cannot be changed (you
+  //  can change them not to be abstract and provide some implementation for them,
+  //  but they have to have the same names, arguments and returned values)
 
   /**
    * Adds element to the queue.

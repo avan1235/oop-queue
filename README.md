@@ -38,6 +38,8 @@ You have time until the end of 09.04.2022
     ```
 
    which will first package all your classes and dependencies to `oop-2022-all.jar` file and then run it on JVM.
-2. Remember about cleaning your code and revisiting visibility modifiers before sending solution as now you can loose
+2. `Integer` is an immutable class, so you don't have to worry about copying values received in arguments that will
+   be stored in your queue.
+3. Remember about cleaning your code and revisiting visibility modifiers before sending solution as now you can loose
    points for bad approach here.
-3. Write any time with any questions about the task if you want.
+4. Write any time with any questions about the task if you want.
