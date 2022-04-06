@@ -1,28 +1,85 @@
 package pl.edu.mimuw.queue;
 
+import java.util.StringJoiner;
+
 public abstract class AbstractIntQueue {
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  protected int length;
+
+  // The head is to the right; the tail is to the left.
+  protected IntQueueNode leftmost, rightmost;
+
+  public AbstractIntQueue() {
+  }
+
+  protected void addRight(Integer value) {
+    ++length;
+    final var newNode = new IntQueueNode(value);
+    if (leftmost == null && rightmost == null) {
+      leftmost = rightmost = newNode;
+      return;
+    }
+    newNode.setPrev(rightmost);
+    rightmost.setNext(newNode);
+    rightmost = newNode;
+  }
+
+  protected Integer peekLeft() {
+    return leftmost == null ? null : leftmost.getValue();
+  }
+
+  protected Integer peekRight() {
+    return rightmost == null ? null : rightmost.getValue();
+  }
+
+  protected Integer pollLeft() {
+    if (leftmost == null && rightmost == null)
+      return null;
+    --length;
+    final var oldNode = leftmost;
+    if (leftmost == rightmost) {
+      leftmost = rightmost = null;
+    } else {
+      leftmost = oldNode.getNext();
+      leftmost.setPrev(null);
+    }
+    return oldNode.getValue();
+  }
+
+  protected Integer pollRight() {
+    if (leftmost == null && rightmost == null)
+      return null;
+    --length;
+    final var oldNode = rightmost;
+    if (leftmost == rightmost) {
+      leftmost = rightmost = null;
+    } else {
+      rightmost = oldNode.getPrev();
+      rightmost.setNext(null);
+    }
+    return oldNode.getValue();
+  }
 
   /**
    * Adds element to the queue.
    *
    * @throws NullPointerException if the specified element is null
    */
-  public abstract void offer(Integer x);
+  public void offer(Integer x) {
+    if (x == null)
+      throw new NullPointerException();
+    addRight(x);
+  }
 
   /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and don't remove the element from the queue
+   * @return the head of this queue, or {@code null} if this queue is empty,
+   *         don't remove the element from the queue
    */
   public abstract Integer peek();
 
   /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and remove the element from the queue
+   * @return the head of this queue, or {@code null} if this queue is empty,
+   *         and remove the element from the queue
    */
   public abstract Integer poll();
 
@@ -30,10 +87,18 @@ public abstract class AbstractIntQueue {
    * @return readable representation of ordered queue elements
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    var joiner = new StringJoiner(", ", "[", "]");
+    for (var i = leftmost; i != null; i = i.getNext()) {
+      joiner.add(String.valueOf(i.getValue()));
+    }
+    return joiner.toString();
+  }
 
   /**
    * @return the number of elements in this queue
    */
-  public abstract int size();
+  public int size() {
+    return length;
+  }
 }
