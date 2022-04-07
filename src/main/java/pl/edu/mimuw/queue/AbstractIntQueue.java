@@ -4,13 +4,10 @@ import java.util.StringJoiner;
 
 public abstract class AbstractIntQueue {
 
-  protected int length;
+  private int length;
 
   // The head is to the right; the tail is to the left.
-  protected IntQueueNode leftmost, rightmost;
-
-  public AbstractIntQueue() {
-  }
+  private IntQueueNode leftmost, rightmost;
 
   protected void addRight(Integer value) {
     ++length;

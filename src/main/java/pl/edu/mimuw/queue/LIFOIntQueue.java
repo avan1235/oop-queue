@@ -11,6 +11,14 @@ public class LIFOIntQueue extends AbstractIntQueue {
     super.offer(x);
   }
 
+  public void push(Integer x) {
+    addRight(x);
+  }
+
+  public Integer pop() {
+    return pollRight();
+  }
+
   public Integer peek() {
     return peekRight();
   }
