@@ -43,6 +43,28 @@ class LIFOTest {
   }
 
   @Test
+  void testAddElementsInOrderBig() {
+    final var queue = new LIFOIntQueue();
+
+    for(int i = 0; i < 100; i++) {
+      queue.offer(2 * i);
+      queue.offer(2 * i + 1);
+
+      var popped = queue.poll();
+      assertEquals(2 * i + 1, popped);
+    }
+
+    assertEquals(100, queue.size());
+
+    int expectedPopped = 198;
+    while(queue.size() != 0) {
+      var popped = queue.poll();
+      assertEquals(expectedPopped, popped);
+      expectedPopped -= 2;
+    }
+  }
+
+  @Test
   void testRemovesElementsInOrder() {
     final var queue = new LIFOIntQueue();
     queue.offer(24);
