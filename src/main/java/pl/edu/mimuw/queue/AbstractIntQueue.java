@@ -2,10 +2,8 @@ package pl.edu.mimuw.queue;
 
 public abstract class AbstractIntQueue {
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  protected IntQueueNode queue;
+  protected int size;
 
   /**
    * Adds element to the queue.
@@ -18,22 +16,60 @@ public abstract class AbstractIntQueue {
    * @return the head of this queue, or {@code null} if this queue is empty
    * and don't remove the element from the queue
    */
-  public abstract Integer peek();
+  public Integer peek() {
+    if (this.isEmpty()) return null;
+    return this.queue.value();
+  }
 
   /**
    * @return the head of this queue, or {@code null} if this queue is empty
    * and remove the element from the queue
    */
-  public abstract Integer poll();
+  public Integer poll() {
+    if (this.isEmpty()) return null;
+
+    Integer head = this.queue.value();
+    IntQueueNode next;
+
+    if (this.queue.next() != null) {
+      next = this.queue.next();
+      this.queue = new IntQueueNode(next.value(), next.next(), null);
+    } else
+      this.queue = null;
+
+    this.size--;
+
+    return head;
+  }
 
   /**
    * @return readable representation of ordered queue elements
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    IntQueueNode peeked = this.queue;
+
+    while (peeked != null) {
+      if (peeked != this.queue) result.append(" ");
+      result.append(peeked.value());
+      peeked = peeked.next();
+    }
+
+    return result.toString();
+  }
 
   /**
    * @return the number of elements in this queue
    */
-  public abstract int size();
+  public int size() {
+    return this.size;
+  }
+
+  /**
+   * @return true if queue is empty, false otherwise
+   */
+  public boolean isEmpty() {
+    return this.size == 0;
+  }
 }
