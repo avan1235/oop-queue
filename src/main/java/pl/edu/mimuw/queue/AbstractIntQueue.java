@@ -36,8 +36,10 @@ public abstract class AbstractIntQueue {
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder("queue: [");
-    while (this.peek() != null) {
-      stringBuilder.append(" " + this.poll());
+    IntQueueNode q = this.front;
+    while (q != null) {
+      stringBuilder.append(" " + q.GetValue());
+      q = q.GetNext();
     }
     stringBuilder.append(" ]");
     return stringBuilder.toString();
