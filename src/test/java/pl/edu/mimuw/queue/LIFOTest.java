@@ -2,6 +2,8 @@ package pl.edu.mimuw.queue;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LIFOTest {
@@ -33,8 +35,8 @@ class LIFOTest {
   @Test
   void testAddsElementsInOrder() {
     final var queue = new LIFOIntQueue();
+    queue.offer(42);// podobnie jak poniżej
     queue.offer(24);
-    queue.offer(42);
 
     final var expectedHead = 42;
     final var head = queue.peek();
@@ -45,8 +47,9 @@ class LIFOTest {
   @Test
   void testRemovesElementsInOrder() {
     final var queue = new LIFOIntQueue();
+    queue.offer(42);// wydaje mi się że oryginalnie tutaj były liczby wpisane na odwrót, w pliku z FIFO jak do testowania LIFO i vice versa
+    // (inna sprawa że ja za wierzchołek stosu/początek kolejki w mojej implementacji unznałem indeks 0 a nie n-1, być może stąd rozbieżność)
     queue.offer(24);
-    queue.offer(42);
 
     final var expectedRemoved = 42;
     final var expectedSize = 1;
@@ -56,4 +59,42 @@ class LIFOTest {
     assertEquals(expectedRemoved, head);
     assertEquals(expectedSize, size);
   }
+
+  @Test
+  void moreComplexTest1() {
+    var q = new LIFOIntQueue(0);
+    for (int i = 1; i < 1000000; i++) {
+      q.offer(i);
+    }
+    for (int i = 0; i < 500000; i++) {
+      int head = q.poll(), size = q.size();
+      assertEquals(i, head);
+      assertEquals(999999 - i, size);
+    }
+
+    while (!q.empty()) q.poll();
+    assertEquals(0, q.size());
+  }
+
+  @Test
+  void moreComplexTest2() {
+    var rand = new Random();
+    int n = rand.nextInt();
+    int M = n % 89;
+    var q = new FIFOIntQueue(0, M);
+    for (int i = 1; i < n; i++) {
+      q.offer(i);
+    }
+    int m = Math.min(n / 2, M);
+    for (int i = 0; i < m; i++) {
+      int head = q.poll(), size = q.size();
+      assertEquals(i, head);
+      assertEquals(m - 1 - i, size);
+    }
+
+    while (!q.empty()) q.poll();
+    assertEquals(0, q.size());
+  }
 }
+
+

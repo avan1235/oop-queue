@@ -12,10 +12,21 @@ public class IntQueueNode {
     this.prev = prev;
   }
 
+  public int getValue() {
+    return this.value;
+  }
+
+  public IntQueueNode getNext() {
+    if (next == null) return null;
+    return new IntQueueNode(next.getValue());
+  }
+
+  public IntQueueNode getPrev() {
+    if (prev == null) return null;
+    return new IntQueueNode(prev.getValue());
+  }
+
   public IntQueueNode(int value) {
     this(value, null, null);
   }
-
-  // TODO: make changes with this class fields, constructors, methods -
-  //  this is just a helper class for your implementation that can be modified as you wish
 }

@@ -1,39 +1,58 @@
 package pl.edu.mimuw.queue;
 
+import java.util.LinkedList;
+
 public abstract class AbstractIntQueue {
+  protected LinkedList<IntQueueNode> nodes;
+  protected int maxCapacity;
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  public AbstractIntQueue(int firstVal)
+  {
+    this();
+    this.nodes.add(new IntQueueNode(firstVal,null,null));
+  }
 
-  /**
-   * Adds element to the queue.
-   *
-   * @throws NullPointerException if the specified element is null
-   */
+  public AbstractIntQueue(int firstVal,int maxCapacity)
+  {
+    this();
+    this.nodes.add(new IntQueueNode(firstVal,null,null));
+    this.maxCapacity=maxCapacity;
+  }
+
+  public AbstractIntQueue()
+  {
+    this.nodes=new LinkedList<>();
+    this.maxCapacity=Integer.MAX_VALUE;
+  }
+
   public abstract void offer(Integer x);
 
-  /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and don't remove the element from the queue
-   */
-  public abstract Integer peek();
+  public Integer peek()
+  {
+    if(this.nodes==null||this.nodes.size()==0)return null;
+    Integer res;
+    res=this.nodes.get(0).getValue();
+    return res;
+  }
 
-  /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and remove the element from the queue
-   */
-  public abstract Integer poll();
+  public Integer poll()
+  {
+    if(this.nodes==null||this.nodes.size()==0)return null;
+    Integer res=this.nodes.get(0).getValue();
+    this.nodes.remove(0);
+    return res;
+  }
 
-  /**
-   * @return readable representation of ordered queue elements
-   */
   @Override
   public abstract String toString();
 
-  /**
-   * @return the number of elements in this queue
-   */
-  public abstract int size();
+  public int size()
+  {
+    return this.nodes.size();
+  }
+
+  public boolean empty()
+  {
+    return this.nodes.size()==0;
+  }
 }
