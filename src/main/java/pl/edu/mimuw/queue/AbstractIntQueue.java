@@ -3,10 +3,12 @@ package pl.edu.mimuw.queue;
 public abstract class AbstractIntQueue {
   protected IntQueueNode begin;
   protected int size;
+
   AbstractIntQueue() {
     begin = null;
     size = 0;
   }
+
   /**
    * Adds element to the queue.
    *
