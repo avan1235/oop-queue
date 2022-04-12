@@ -40,8 +40,6 @@ class FIFOTest {
     assertEquals(expectedHead, head);
   }
 
-  // TODO: add more complex test for elements' order in queue
-
   @Test
   void testRemovesElementsInOrder() {
     final var queue = new FIFOIntQueue();
@@ -56,4 +54,24 @@ class FIFOTest {
     assertEquals(expectedRemoved, head);
     assertEquals(expectedSize, size);
   }
+
+  @Test
+  void testAddsElementsInBulk() {
+    final var queue = new FIFOIntQueue();
+
+    final var Size = 42;
+    for (int i = 0; i < Size; i++) queue.offer(i);
+    for (int i = Size; i > 0; i--) queue.offer(i);
+
+    for (int i = 0; i < Size; i++) {
+      final var element = queue.poll();
+      assertEquals(i, element);
+    }
+    for (int i = Size; i > 0; i--) {
+      final var element = queue.poll();
+      assertEquals(i, element);
+    }
+  }
 }
+
+

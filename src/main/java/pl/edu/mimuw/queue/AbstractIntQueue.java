@@ -1,11 +1,12 @@
 package pl.edu.mimuw.queue;
 
 public abstract class AbstractIntQueue {
+  protected IntQueueNode front;
+  protected int size;
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  protected AbstractIntQueue() {
+    this.size = 0;
+  }
 
   /**
    * Adds element to the queue.
@@ -18,7 +19,10 @@ public abstract class AbstractIntQueue {
    * @return the head of this queue, or {@code null} if this queue is empty
    * and don't remove the element from the queue
    */
-  public abstract Integer peek();
+  public Integer peek() {
+    if (size == 0) return null;
+    return this.front.GetValue();
+  }
 
   /**
    * @return the head of this queue, or {@code null} if this queue is empty
@@ -30,10 +34,19 @@ public abstract class AbstractIntQueue {
    * @return readable representation of ordered queue elements
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    StringBuilder stringBuilder = new StringBuilder("queue: [");
+    while (this.peek() != null) {
+      stringBuilder.append(" " + this.poll());
+    }
+    stringBuilder.append(" ]");
+    return stringBuilder.toString();
+  }
 
   /**
    * @return the number of elements in this queue
    */
-  public abstract int size();
+  public int size() {
+    return this.size;
+  }
 }
