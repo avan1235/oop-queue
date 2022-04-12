@@ -1,12 +1,12 @@
 package pl.edu.mimuw.queue;
 
 public abstract class AbstractIntQueue {
-
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
-
+  protected IntQueueNode begin;
+  protected int size;
+  AbstractIntQueue() {
+    begin = null;
+    size = 0;
+  }
   /**
    * Adds element to the queue.
    *
@@ -30,10 +30,22 @@ public abstract class AbstractIntQueue {
    * @return readable representation of ordered queue elements
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    StringBuilder str = new StringBuilder("LIFO queue, next elements: ");
+    IntQueueNode act = begin;
+    while (act != null) {
+      str.append(act.value);
+      str.append(", ");
+      act = act.next;
+    }
+    return str.toString();
+  }
 
   /**
    * @return the number of elements in this queue
    */
-  public abstract int size();
+
+  public int size() {
+    return size;
+  }
 }
