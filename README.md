@@ -1,6 +1,6 @@
 # Queue of Integers
 
-Your task is to implement `FIFOIntQueue` and `FIFOIntQueue` that has to be implemented with the usage of
+Your task is to implement `FIFOIntQueue` and `LIFOIntQueue` that has to be implemented with the usage of
 `IntQueueNode` class and has to satisfy the set of methods defined in `AbstractIntQueue` class (
 so definitely this time you cannot use lists and arrays for your implementation).
 
