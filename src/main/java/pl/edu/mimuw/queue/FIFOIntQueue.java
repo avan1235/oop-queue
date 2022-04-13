@@ -3,14 +3,14 @@ package pl.edu.mimuw.queue;
 public class FIFOIntQueue extends AbstractIntQueue {
 
   public FIFOIntQueue() {
-    this.queue = null;
-    this.size = 0;
+    super();
   }
 
   public FIFOIntQueue(int value) {
-    this.queue = new IntQueueNode(value);
-    this.size = 1;
+    super(value);
   }
+
+  public String getType() { return "FIFO"; }
 
   /**
    * Adds element to the end of the queue. As a result, new element can be
@@ -27,7 +27,6 @@ public class FIFOIntQueue extends AbstractIntQueue {
       this.queue = new IntQueueNode(x);
     else
       this.queue.attachToEnd(new IntQueueNode(x));
-
     this.size++;
   }
 }

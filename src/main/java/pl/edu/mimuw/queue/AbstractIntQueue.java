@@ -5,6 +5,16 @@ public abstract class AbstractIntQueue {
   protected IntQueueNode queue;
   protected int size;
 
+  public AbstractIntQueue() {
+    this.queue = null;
+    this.size = 0;
+  }
+
+  public AbstractIntQueue(int value) {
+    this.queue = new IntQueueNode(value);
+    this.size = 1;
+  }
+
   /**
    * Adds element to the queue.
    *
@@ -33,7 +43,7 @@ public abstract class AbstractIntQueue {
 
     if (this.queue.next() != null) {
       next = this.queue.next();
-      this.queue = new IntQueueNode(next.value(), next.next(), null);
+      this.queue = new IntQueueNode(next.value(), next.next(), this.queue.prev());
     } else
       this.queue = null;
 
@@ -45,9 +55,10 @@ public abstract class AbstractIntQueue {
   /**
    * @return readable representation of ordered queue elements
    */
+
   @Override
   public String toString() {
-    StringBuilder result = new StringBuilder();
+    StringBuilder result = new StringBuilder(this.getType() + " [");
     IntQueueNode peeked = this.queue;
 
     while (peeked != null) {
@@ -55,6 +66,8 @@ public abstract class AbstractIntQueue {
       result.append(peeked.value());
       peeked = peeked.next();
     }
+
+    result.append("]");
 
     return result.toString();
   }
@@ -72,4 +85,9 @@ public abstract class AbstractIntQueue {
   public boolean isEmpty() {
     return this.size == 0;
   }
+
+  /**
+   * @return queue type, i.e. LIFO
+   */
+  public abstract String getType();
 }

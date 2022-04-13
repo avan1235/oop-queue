@@ -3,14 +3,14 @@ package pl.edu.mimuw.queue;
 public class LIFOIntQueue extends AbstractIntQueue {
 
   public LIFOIntQueue() {
-    this.queue = null;
-    this.size = 0;
+    super();
   }
 
   public LIFOIntQueue(int value) {
-    this.queue = new IntQueueNode(value);
-    this.size = 1;
+    super(value);
   }
+
+  public String getType() { return "LIFO"; }
 
   /**
    * Adds element as the first element of the queue and makes it a new

@@ -28,16 +28,9 @@ public class IntQueueNode {
    * extends that queue by adding a new end node.
    */
   public void attachToEnd(IntQueueNode newEnd) {
-    if (this.next == null)
-      this.next = newEnd;
-    else {
-      IntQueueNode end = this.next;
-
-      while (end.next != null)
-        end = end.next;
-
-      end.next = newEnd;
-    }
+    if (this.next == null) this.next = newEnd;
+    else this.prev.next = newEnd;
+    this.prev = newEnd;
   }
 
   /**
