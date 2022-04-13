@@ -28,7 +28,25 @@ class LIFOTest {
     assertEquals(expectedSize, size);
   }
 
-  // TODO: add more complex test for elements' order in queue
+  @Test
+  void testAddsAndPops() {
+    final var queue = new LIFOIntQueue();
+    int[] numbers = {1,6,3,7,3};
+    int[] numbersWithout3 = {1,6,7};
+
+    for (int i = 0; i < 3; i++) {
+      queue.offer(numbers[i]);
+    }
+    assertEquals(queue.poll(), 3);
+    for (int i = 3; i < 5; i++) {
+      queue.offer(numbers[i]);
+    }
+    assertEquals(queue.poll(), 3);
+    for (int i = 0; i < 3; i++) {
+      var elem = queue.poll();
+      assertEquals(numbersWithout3[2 - i], elem);
+    }
+  }
 
   @Test
   void testAddsElementsInOrder() {
