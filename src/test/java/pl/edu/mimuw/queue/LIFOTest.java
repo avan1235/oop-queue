@@ -28,7 +28,17 @@ class LIFOTest {
     assertEquals(expectedSize, size);
   }
 
-  // TODO: add more complex test for elements' order in queue
+  @Test
+  void moreComplexTest() {
+    final var queue = new LIFOIntQueue();
+    for(int i=0;i<100;i++) {
+      queue.offer(2137*i);
+    }
+    for(int i=99;i>=0;i--) {
+      assertEquals(queue.poll(), 2137*i);
+    }
+  }
+
 
   @Test
   void testAddsElementsInOrder() {

@@ -2,10 +2,21 @@ package pl.edu.mimuw.queue;
 
 public abstract class AbstractIntQueue {
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  protected IntQueueNode head;
+  protected int length;
+
+  public AbstractIntQueue() {
+    this.head = null;
+    this.length = 0;
+  }
+
+
+  /**
+   * @return number of elements of this queue
+   */
+  public int getLength() {
+    return this.length;
+  }
 
   /**
    * Adds element to the queue.
@@ -18,22 +29,42 @@ public abstract class AbstractIntQueue {
    * @return the head of this queue, or {@code null} if this queue is empty
    * and don't remove the element from the queue
    */
-  public abstract Integer peek();
+  public Integer peek() {
+    if (this.head == null) return null;
+    return this.head.getValue();
+  }
 
   /**
    * @return the head of this queue, or {@code null} if this queue is empty
    * and remove the element from the queue
    */
-  public abstract Integer poll();
+  public Integer poll() {
+    if (this.head == null) return null;
+    int tmp = this.head.getValue();
+    this.head = this.head.next;
+    if (this.head != null) this.head.prev = null;
+    this.length--;
+    return tmp;
+  }
 
   /**
    * @return readable representation of ordered queue elements
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    IntQueueNode tmp = this.head;
+    for (int i = 0; i < this.length; i++) {
+      sb.append(tmp.getValue() + " ");
+      tmp = tmp.next;
+    }
+    return sb.toString();
+  }
 
   /**
    * @return the number of elements in this queue
    */
-  public abstract int size();
+  public int size() {
+    return this.length;
+  }
 }
