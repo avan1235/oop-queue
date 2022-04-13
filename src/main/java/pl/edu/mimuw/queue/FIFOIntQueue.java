@@ -1,5 +1,15 @@
 package pl.edu.mimuw.queue;
 
 public class FIFOIntQueue extends AbstractIntQueue {
-  // TODO: make changes with this class fields, constructors, methods
+	public void offer(Integer value) {
+		super.pushBack(value);
+	}
+	
+	public Integer peek() {
+		return super.front();
+	}
+	
+	public Integer poll() {
+		return super.popFront();
+	}
 }
