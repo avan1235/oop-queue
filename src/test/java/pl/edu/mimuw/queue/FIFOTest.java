@@ -61,6 +61,14 @@ class FIFOTest {
     final var expectedHead3 = 21;
     final var head3 = queue.poll();
     assertEquals(expectedHead3, head3);
+
+    final var expectedHead4 = 37;
+    final var head4 = queue.poll();
+    assertEquals(expectedHead4, head4);
+
+    final var expectedHead5 = 100;
+    final var head5 = queue.poll();
+    assertEquals(expectedHead5, head5);
   }
 
   @Test

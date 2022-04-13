@@ -49,6 +49,14 @@ class LIFOTest {
     final var expectedHead3 = 100;
     final var head3 = queue.poll();
     assertEquals(expectedHead3, head3);
+
+    final var expectedHead4 = 24;
+    final var head4 = queue.poll();
+    assertEquals(expectedHead4, head4);
+
+    final var expectedHead5 = 42;
+    final var head5 = queue.poll();
+    assertEquals(expectedHead5, head5);
   }
 
   @Test
