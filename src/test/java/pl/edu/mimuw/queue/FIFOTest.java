@@ -40,7 +40,22 @@ class FIFOTest {
     assertEquals(expectedHead, head);
   }
 
-  // TODO: add more complex test for elements' order in queue
+  @Test
+  void testRepetitiveAddingAndRemoving() {
+    final var queue = new FIFOIntQueue();
+    for (int i = 0; i < 20; i++) {
+      queue.offer(i);
+      queue.offer(2*i);
+      var head = queue.poll();
+      var secondhead = queue.poll();
+      assertEquals(i, head.intValue());
+      assertEquals(2*i, secondhead.intValue());
+    }
+    queue.offer(2);
+    queue.offer(3);
+    var lastHead = queue.poll();
+    assertEquals(2, lastHead.intValue());
+  }
 
   @Test
   void testRemovesElementsInOrder() {

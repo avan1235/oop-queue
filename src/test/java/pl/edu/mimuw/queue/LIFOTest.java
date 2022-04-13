@@ -1,8 +1,8 @@
 package pl.edu.mimuw.queue;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 class LIFOTest {
 
@@ -28,7 +28,22 @@ class LIFOTest {
     assertEquals(expectedSize, size);
   }
 
-  // TODO: add more complex test for elements' order in queue
+  @Test
+  void testRepetitiveAddingAndRemoving() {
+    final var queue = new LIFOIntQueue();
+    for (int i = 0; i < 20; i++) {
+      queue.offer(i);
+      queue.offer(2*i);
+      var head = queue.poll();
+      var secondhead = queue.poll();
+      assertEquals(2*i, head);
+      assertEquals(i, secondhead);
+    }
+    queue.offer(2);
+    queue.offer(3);
+    var lastHead = queue.poll();
+    assertEquals(3, lastHead.intValue());
+  }
 
   @Test
   void testAddsElementsInOrder() {
