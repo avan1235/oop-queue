@@ -63,8 +63,6 @@ class FIFOTest {
 			queue.offer(x);
 		}
 		
-		assertEquals(queue.toString(), "size: 4\nelements: [2, 1, 3, 7]\n");
-		
 		for(var x: new int[]{2, 1, 3, 7}) {
 			assertEquals(queue.poll(), x);
 		}

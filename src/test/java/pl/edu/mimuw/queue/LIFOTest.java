@@ -63,8 +63,6 @@ class LIFOTest {
 			queue.offer(x);
 		}
 		
-		assertEquals(queue.toString(), "size: 4\nelements: [7, 3, 1, 2]\n");
-		
 		for(var x: new int[]{7, 3, 1, 2}) {
 			assertEquals(queue.poll(), x);
 		}

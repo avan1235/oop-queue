@@ -9,29 +9,29 @@ public abstract class AbstractIntQueue {
 		this.left = this.right = null;
 	}
 	
-	public Integer front() {
+	protected Integer front() {
 		if(this.size == 0) {
 			return null;
 		}
 		
-		return (this.left).getValue();
+		return this.left.getValue();
 	}
 	
-	public Integer back() {
+	protected Integer back() {
 		if(this.size == 0) {
 			return null;
 		}
 		
-		return (this.right).getValue();
+		return this.right.getValue();
 	}
 	
-	public Integer popFront() {
+	protected Integer popFront() {
 		if(this.size == 0) {
 			return null;
 		}
 		
-		final var answer = (this.left).getValue();
-		this.left = (this.left).getNext();
+		final var answer = this.left.getValue();
+		this.left = this.left.getNext();
 		
 		if(--this.size == 0) {
 			this.right = null;
@@ -40,22 +40,22 @@ public abstract class AbstractIntQueue {
 		return answer;
 	}
 	
-	public Integer popBack() {
+	protected Integer popBack() {
 		if(this.size == 0) {
 			return null;
 		}
 		
-		final var answer = (this.right).getValue();
-		this.right = (this.right).getPrev();
+		final var answer = this.right.getValue();
+		this.right = this.right.getPrev();
 		
-		if(--this.size == 1) {
+		if(--this.size == 0) {
 			this.left = null;
 		}
 		
 		return answer;
 	}
 	
-	public void pushFront(Integer value) {
+	protected void pushFront(Integer value) {
 		if(value == null) {
 			throw new NullPointerException("Null elements can't be added.");
 		}
@@ -65,15 +65,15 @@ public abstract class AbstractIntQueue {
 			this.right = left;
 		}
 		else {
-			(this.left).setPrev(new IntQueueNode(value));
-			((this.left).getPrev()).setNext(this.left);
-			this.left = (this.left).getPrev();
+			this.left.setPrev(new IntQueueNode(value));
+			this.left.getPrev().setNext(this.left);
+			this.left = this.left.getPrev();
 		}
 		
 		this.size++;
 	}
 	
-	public void pushBack(Integer value) {
+	protected void pushBack(Integer value) {
 		if(value == null) {
 			throw new NullPointerException("Null elements can't be added.");
 		}
@@ -83,9 +83,9 @@ public abstract class AbstractIntQueue {
 			this.right = this.left;
 		}
 		else {
-			(this.right).setNext(new IntQueueNode(value));
-			((this.right).getNext()).setPrev(this.right);
-			this.right = (this.right).getNext();
+			this.right.setNext(new IntQueueNode(value));
+			this.right.getNext().setPrev(this.right);
+			this.right = this.right.getNext();
 		}
 		
 		this.size++;
@@ -121,12 +121,11 @@ public abstract class AbstractIntQueue {
 	 */
 	@Override
 	public String toString() {
-		var answer = new StringBuilder();
+		var answer = new StringBuilder()
+		                 .append("size: ")
+		                 .append(this.size())
+		                 .append("\nelements: [");
 		
-		answer.append("size: ");
-		answer.append(this.size);
-		
-		answer.append("\nelements: [");
 		IntQueueNode curr = this.left;
 		while(curr != null) {
 			answer.append(curr.getValue());
