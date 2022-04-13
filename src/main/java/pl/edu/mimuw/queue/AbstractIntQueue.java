@@ -44,7 +44,7 @@ public abstract class AbstractIntQueue {
     IntQueueNode tempNode = this.first;
     StringBuilder output = new StringBuilder();
     while (tempNode != null) {
-      output.append(" ").append(tempNode.getValue());
+      output.append(tempNode.getValue()).append(" ");
       tempNode = tempNode.getNext();
     }
     return output.toString();

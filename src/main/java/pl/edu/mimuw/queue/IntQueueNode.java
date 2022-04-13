@@ -17,7 +17,7 @@ public class IntQueueNode {
   }
 
   public int getValue() {
-    return value;
+    return this.value;
   }
 
   public IntQueueNode getNext() {
