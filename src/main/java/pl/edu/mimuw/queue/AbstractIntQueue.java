@@ -2,38 +2,48 @@ package pl.edu.mimuw.queue;
 
 public abstract class AbstractIntQueue {
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  protected int size;
+  protected IntQueueNode head;
 
-  /**
-   * Adds element to the queue.
-   *
-   * @throws NullPointerException if the specified element is null
-   */
+  public AbstractIntQueue() {
+    this.size = 0;
+  }
+
   public abstract void offer(Integer x);
 
-  /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and don't remove the element from the queue
-   */
-  public abstract Integer peek();
+  public Integer peek() {
+    if (size > 0) {
+      return this.head.GetValue();
+    } else {
+      return null;
+    }
+  }
 
-  /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and remove the element from the queue
-   */
   public abstract Integer poll();
 
-  /**
-   * @return readable representation of ordered queue elements
-   */
   @Override
-  public abstract String toString();
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    result.append("Queue size: ")
+      .append(this.size)
+      .append("\n")
+      .append("Queue order:")
+      .append("\n");
 
-  /**
-   * @return the number of elements in this queue
-   */
-  public abstract int size();
+    IntQueueNode copy = this.head;
+    while(copy != null){
+      result.append(copy.GetValue());
+      copy = copy.GetNext();
+      if(copy != null){
+        result.append("; ");
+      }else{
+        result.append("\n");
+      }
+    }
+    return result.toString();
+  }
+
+  public int size() {
+    return this.size;
+  }
 }
