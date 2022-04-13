@@ -1,7 +1,6 @@
 package pl.edu.mimuw.queue;
 
 public class FIFOIntQueue extends AbstractIntQueue {
-  // TODO: make changes with this class fields, constructors, methods
 
   private IntQueueNode tail;
 
@@ -37,11 +36,21 @@ public class FIFOIntQueue extends AbstractIntQueue {
 
     final var value = this.head.getValue();
     this.head = this.head.getNext();
+    this.head.setPrev(null);
 
     if (this.head == null) {
       this.tail = null;
     }
 
     return value;
+  }
+
+  @Override
+  public String toString() {
+    final var sb = new StringBuilder();
+
+    sb.append("FIFO ").append(super.toString());
+
+    return sb.toString();
   }
 }

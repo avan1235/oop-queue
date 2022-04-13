@@ -1,7 +1,6 @@
 package pl.edu.mimuw.queue;
 
 public class LIFOIntQueue extends AbstractIntQueue {
-  // TODO: make changes with this class fields, constructors, methods
 
   public LIFOIntQueue() {
     super();
@@ -33,7 +32,17 @@ public class LIFOIntQueue extends AbstractIntQueue {
 
     final var value = this.head.getValue();
     this.head = this.head.getNext();
+    this.head.setPrev(null);
 
     return value;
+  }
+
+  @Override
+  public String toString() {
+    final var sb = new StringBuilder();
+
+    sb.append("LIFO ").append(super.toString());
+
+    return sb.toString();
   }
 }

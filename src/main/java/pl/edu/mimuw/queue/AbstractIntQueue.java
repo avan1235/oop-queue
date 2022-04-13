@@ -2,11 +2,6 @@ package pl.edu.mimuw.queue;
 
 public abstract class AbstractIntQueue {
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
-
   protected IntQueueNode head;
 
   protected AbstractIntQueue() {
@@ -45,7 +40,7 @@ public abstract class AbstractIntQueue {
   public String toString() {
     final var sb = new StringBuilder();
 
-    sb.append("Values in the queue: [");
+    sb.append("queue: [");
     for (IntQueueNode node = head; node != null; node = node.getNext()) {
       sb.append(node.getValue());
       if (node.getNext() != null) {
