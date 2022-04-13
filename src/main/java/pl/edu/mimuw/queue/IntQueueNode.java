@@ -1,21 +1,30 @@
 package pl.edu.mimuw.queue;
-
+import java.lang.Integer;
 public class IntQueueNode {
 
   private final int value;
-  private final IntQueueNode next;
-  private final IntQueueNode prev;
+  private IntQueueNode next;
 
-  public IntQueueNode(int value, IntQueueNode next, IntQueueNode prev) {
+  public IntQueueNode(int value, IntQueueNode next) {
     this.value = value;
     this.next = next;
-    this.prev = prev;
+  }
+
+  public IntQueueNode getNext(){
+    return next;
+  }
+
+  public Integer getValue(){
+    return Integer.valueOf(value);
+  }
+  /**
+   * setNext is safe - queue never gives user access to currently used IntQueueNode
+   */
+  public void setNext(IntQueueNode next){
+    this.next = next;
   }
 
   public IntQueueNode(int value) {
-    this(value, null, null);
+    this(value, null);
   }
-
-  // TODO: make changes with this class fields, constructors, methods -
-  //  this is just a helper class for your implementation that can be modified as you wish
 }
