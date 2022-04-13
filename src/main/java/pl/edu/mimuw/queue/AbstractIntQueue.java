@@ -7,6 +7,12 @@ public abstract class AbstractIntQueue {
   //  can change them not to be abstract and provide some implementation for them,
   //  but they have to have the same names, arguments and returned values)
 
+  protected IntQueueNode head;
+
+  protected AbstractIntQueue() {
+    head = null;
+  }
+
   /**
    * Adds element to the queue.
    *
@@ -30,10 +36,31 @@ public abstract class AbstractIntQueue {
    * @return readable representation of ordered queue elements
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("Values in the queue: [");
+    for (IntQueueNode node = head; node != null; node = node.getNext()) {
+      sb.append(node.getValue());
+      if (node.getNext() != null) {
+        sb.append(", ");
+      }
+    }
+    sb.append("]");
+
+    return sb.toString();
+  }
 
   /**
    * @return the number of elements in this queue
    */
-  public abstract int size();
+  public int size() {
+    int size = 0;
+
+    for (IntQueueNode node = head; node != null; node = node.getNext()) {
+      size++;
+    }
+
+    return size;
+  }
 }
