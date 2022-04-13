@@ -36,9 +36,10 @@ public class FIFOIntQueue extends AbstractIntQueue {
 
     final var value = this.head.getValue();
     this.head = this.head.getNext();
-    this.head.setPrev(null);
 
-    if (this.head == null) {
+    if (this.head != null) {
+      this.head.setPrev(null);
+    } else {
       this.tail = null;
     }
 

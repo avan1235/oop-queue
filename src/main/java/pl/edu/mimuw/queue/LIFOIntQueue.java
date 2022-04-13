@@ -32,7 +32,10 @@ public class LIFOIntQueue extends AbstractIntQueue {
 
     final var value = this.head.getValue();
     this.head = this.head.getNext();
-    this.head.setPrev(null);
+
+    if (this.head != null) {
+      this.head.setPrev(null);
+    }
 
     return value;
   }
