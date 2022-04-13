@@ -40,7 +40,26 @@ class FIFOTest {
     assertEquals(expectedHead, head);
   }
 
-  // TODO: add more complex test for elements' order in queue
+  @Test
+  void testAddsAndPops() {
+    final var queue = new FIFOIntQueue();
+    int[] numbers = {1,6,3,7,3};
+    int[] last3Numbers = {3,7,3};
+
+    for (int i = 0; i < 3; i++) {
+      queue.offer(numbers[i]);
+    }
+    assertEquals(queue.poll(), 1);
+    for (int i = 3; i < 5; i++) {
+      queue.offer(numbers[i]);
+    }
+    assertEquals(queue.poll(), 6);
+    for (int i = 0; i < 3; i++) {
+      var elem = queue.poll();
+      assertEquals(last3Numbers[i], elem);
+    }
+  }
+
 
   @Test
   void testRemovesElementsInOrder() {
