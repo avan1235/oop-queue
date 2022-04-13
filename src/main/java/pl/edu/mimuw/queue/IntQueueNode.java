@@ -2,9 +2,10 @@ package pl.edu.mimuw.queue;
 
 public class IntQueueNode {
 
-  private final int value;
-  private final IntQueueNode next;
-  private final IntQueueNode prev;
+  private int value;
+  private IntQueueNode next;
+  private IntQueueNode prev;
+
 
   public IntQueueNode(int value, IntQueueNode next, IntQueueNode prev) {
     this.value = value;
@@ -16,6 +17,25 @@ public class IntQueueNode {
     this(value, null, null);
   }
 
-  // TODO: make changes with this class fields, constructors, methods -
-  //  this is just a helper class for your implementation that can be modified as you wish
+  public IntQueueNode getPrev() {
+
+    return this.prev;
+  }
+
+  public IntQueueNode getNext() {
+    return this.next;
+  }
+
+  public int getValue() {
+    return this.value;
+  }
+
+  public void setNext(IntQueueNode toSet) {
+    this.next = toSet;
+  }
+
+  public void setPrev(IntQueueNode toSet) {
+    this.prev = toSet;
+  }
+
 }
