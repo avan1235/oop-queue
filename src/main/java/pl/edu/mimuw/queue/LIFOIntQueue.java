@@ -7,6 +7,12 @@ public class LIFOIntQueue extends AbstractIntQueue {
     super();
   }
 
+  /**
+   * Adds a new element before the current head of the queue.
+   *
+   * @param x element to be added
+   * @throws NullPointerException if x is null
+   */
   public void offer(Integer x) {
     if (x == null) {
       throw new NullPointerException();
@@ -20,21 +26,14 @@ public class LIFOIntQueue extends AbstractIntQueue {
     }
   }
 
-  public Integer peek() {
-    if (this.size() == 0) {
-      return null;
-    }
-
-    return this.head.getValue();
-  }
-
   public Integer poll() {
     if (this.size() == 0) {
       return null;
     }
 
-    Integer value = this.head.getValue();
+    final var value = this.head.getValue();
     this.head = this.head.getNext();
+
     return value;
   }
 }

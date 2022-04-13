@@ -10,6 +10,12 @@ public class FIFOIntQueue extends AbstractIntQueue {
     this.tail = null;
   }
 
+  /**
+   * Adds the given value after the current tail of the queue.
+   *
+   * @param x the value to add
+   * @throws NullPointerException if the given value is null
+   */
   public void offer(Integer x) {
     if (x == null) {
       throw new NullPointerException();
@@ -24,26 +30,18 @@ public class FIFOIntQueue extends AbstractIntQueue {
     }
   }
 
-  public Integer peek() {
-    if (this.size() == 0) {
-      return null;
-    }
-
-    return this.head.getValue();
-  }
-
   public Integer poll() {
     if (this.size() == 0) {
       return null;
     }
 
-    final var x = this.head.getValue();
+    final var value = this.head.getValue();
     this.head = this.head.getNext();
 
     if (this.head == null) {
       this.tail = null;
     }
 
-    return x;
+    return value;
   }
 }

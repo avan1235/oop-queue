@@ -24,7 +24,13 @@ public abstract class AbstractIntQueue {
    * @return the head of this queue, or {@code null} if this queue is empty
    * and don't remove the element from the queue
    */
-  public abstract Integer peek();
+  public Integer peek() {
+    if (this.size() == 0) {
+      return null;
+    }
+
+    return this.head.getValue();
+  }
 
   /**
    * @return the head of this queue, or {@code null} if this queue is empty
@@ -37,7 +43,7 @@ public abstract class AbstractIntQueue {
    */
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
+    final var sb = new StringBuilder();
 
     sb.append("Values in the queue: [");
     for (IntQueueNode node = head; node != null; node = node.getNext()) {
