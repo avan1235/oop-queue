@@ -40,7 +40,7 @@ class FIFOTest {
 
     assertEquals(expectedHead, head);
 
-    head = queue.poll();
+    queue.poll();
     head = queue.poll();
     expectedHead = 24;
 
