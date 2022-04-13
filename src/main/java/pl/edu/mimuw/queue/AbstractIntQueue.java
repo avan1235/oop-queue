@@ -1,11 +1,17 @@
 package pl.edu.mimuw.queue;
 
+import java.util.ArrayList;
+
+
 public abstract class AbstractIntQueue {
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  protected int size;
+  protected IntQueueNode first;
+
+  public AbstractIntQueue() {
+    this.first = null;
+    this.size = 0;
+  }
 
   /**
    * Adds element to the queue.
@@ -18,7 +24,11 @@ public abstract class AbstractIntQueue {
    * @return the head of this queue, or {@code null} if this queue is empty
    * and don't remove the element from the queue
    */
-  public abstract Integer peek();
+  public Integer peek() {
+    if (this.first == null)
+      return null;
+    return this.first.getValue();
+  }
 
   /**
    * @return the head of this queue, or {@code null} if this queue is empty
@@ -30,10 +40,20 @@ public abstract class AbstractIntQueue {
    * @return readable representation of ordered queue elements
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    IntQueueNode tempNode = this.first;
+    StringBuilder output = new StringBuilder();
+    while (tempNode != null) {
+      output.append(" ").append(tempNode.getValue());
+      tempNode = tempNode.getNext();
+    }
+    return output.toString();
+  }
 
   /**
    * @return the number of elements in this queue
    */
-  public abstract int size();
+  public Integer size() {
+    return this.size;
+  }
 }
