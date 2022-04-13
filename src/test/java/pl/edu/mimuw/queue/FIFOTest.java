@@ -3,6 +3,7 @@ package pl.edu.mimuw.queue;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class FIFOTest {
 
@@ -34,13 +35,28 @@ class FIFOTest {
     queue.offer(42);
     queue.offer(24);
 
-    final var expectedHead = 42;
-    final var head = queue.peek();
+    var expectedHead = 42;
+    var head = queue.peek();
 
     assertEquals(expectedHead, head);
-  }
 
-  // TODO: add more complex test for elements' order in queue
+    queue.poll();
+    head = queue.poll();
+    expectedHead = 24;
+
+    assertEquals(expectedHead, head);
+
+    head = queue.poll();
+    assertNull(head);
+
+
+    for(int i=0; i<4; i++)
+      queue.offer(i);
+    for(int i=0; i<4; i++)
+      assertEquals(queue.poll(), i);
+
+
+  }
 
   @Test
   void testRemovesElementsInOrder() {
