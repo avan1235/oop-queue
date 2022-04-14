@@ -36,7 +36,21 @@ class FIFOTest {
 
     final var expectedHead = 42;
     final var head = queue.peek();
-
+    assertEquals(expectedHead, head);
+  }
+  @Test
+  void sameValuesTest() {
+    final var queue = new FIFOIntQueue();
+    queue.offer(2);
+    queue.offer(2);
+    queue.offer(1235);
+    queue.offer(2);
+    queue.offer(2);
+    queue.offer(2);
+    queue.poll();
+    queue.poll();
+    final var expectedHead = 1235;
+    final var head = queue.peek();
     assertEquals(expectedHead, head);
   }
 
