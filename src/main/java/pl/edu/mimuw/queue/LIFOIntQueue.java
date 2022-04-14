@@ -15,12 +15,12 @@ public class LIFOIntQueue extends AbstractIntQueue {
   }
 
   @Override
-  public void offer(Integer x) {
+    public void offer(Integer x) {
     if (this.size == 0) super.offer(x);//wykorzystanie wspólnego działania dla przypadku dodawania pierwszego elementu
     else if (this.size < this.maxCapacity) {
-      var newNode = new IntQueueNode(x, null, this.rear);
-      this.rear.setNext(newNode);
-      this.rear = newNode;
+      var newNode = new IntQueueNode(x, this.front, null);
+      this.front.setPrev(newNode);
+      this.front = newNode;
       this.size++;
     }
   }

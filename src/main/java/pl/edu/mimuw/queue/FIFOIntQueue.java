@@ -18,9 +18,9 @@ public class FIFOIntQueue extends AbstractIntQueue {
   public void offer(Integer x) {
     if (this.size == 0) super.offer(x);//wykorzystanie wspólnego działania dla przypadku dodawania pierwszego elementu
     else if (this.size < this.maxCapacity) {
-      var newNode = new IntQueueNode(x, this.front, null);
-      this.front.setPrev(newNode);
-      this.front = newNode;
+      var newNode = new IntQueueNode(x, null, this.rear);
+      this.rear.setNext(newNode);
+      this.rear = newNode;
       this.size++;
     }
   }

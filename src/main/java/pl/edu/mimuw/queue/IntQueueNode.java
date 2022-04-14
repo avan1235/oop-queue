@@ -17,7 +17,6 @@ public class IntQueueNode {
   }
 
   public IntQueueNode getNext() {
-    //if (next == null) return null;
     return next;
   }
 

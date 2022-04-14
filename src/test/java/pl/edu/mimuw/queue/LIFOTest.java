@@ -33,8 +33,8 @@ class LIFOTest {
   @Test
   void testAddsElementsInOrder() {
     final var queue = new LIFOIntQueue();
-    queue.offer(42);// podobnie jak poniżej
     queue.offer(24);
+    queue.offer(42);
 
     final var expectedHead = 42;
     final var head = queue.peek();
@@ -45,9 +45,8 @@ class LIFOTest {
   @Test
   void testRemovesElementsInOrder() {
     final var queue = new LIFOIntQueue();
-    queue.offer(42);// wydaje mi się że oryginalnie tutaj były liczby wpisane na odwrót, w pliku z FIFO jak do testowania LIFO i vice versa
-    // (inna sprawa że ja za wierzchołek stosu/początek kolejki w mojej implementacji unznałem indeks 0 a nie n-1, być może stąd rozbieżność)
     queue.offer(24);
+    queue.offer(42);
 
     final var expectedRemoved = 42;
     final var expectedSize = 1;
@@ -66,7 +65,7 @@ class LIFOTest {
     }
     for (int i = 0; i < 50; i++) {
       int head = q.poll(), size = q.size();
-      assertEquals(i, head);
+      assertEquals(99 - i, head);
       assertEquals(99 - i, size);
     }
 
@@ -88,7 +87,7 @@ class LIFOTest {
     int m = Math.min(n / 2, M);
     for (int i = 0; i < m; i++) {
       int head = q.poll(), size = q.size();
-      assertEquals(i, head);
+      assertEquals(m - 1 - i, head);
       assertEquals(m - 1 - i, size);
     }
 
@@ -110,7 +109,7 @@ class LIFOTest {
     int m = Math.min(n / 2, M);
     for (int i = 0; i < m; i++) {
       int head = q.poll(), size = q.size();
-      assertEquals(i, head);
+      assertEquals(m - 1 - i, head);
       assertEquals(m - 1 - i, size);
     }
 

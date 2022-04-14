@@ -11,8 +11,8 @@ public class Main {
     //Dodatkowy pseudo-test ze scannerem do ręcznego używania  w mainie (zamiast asercji po prostu drukuje na ekran bieżcy stan danych, poza tym do dopisanych do pliku z testami)
     Scanner scanner = new Scanner(System.in);
     int n = scanner.nextInt();
-    var s = new FIFOIntQueue();
-    var q = new LIFOIntQueue();
+    var q = new FIFOIntQueue();
+    var s = new LIFOIntQueue();
     for (int i = 0; i < n; i++) {
       s.offer(i);
       q.offer(i);

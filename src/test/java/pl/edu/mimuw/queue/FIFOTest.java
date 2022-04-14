@@ -33,8 +33,8 @@ class FIFOTest {
   @Test
   void testAddsElementsInOrder() {
     final var queue = new FIFOIntQueue();
-    queue.offer(24);
     queue.offer(42);
+    queue.offer(24);
 
     final var expectedHead = 42;
     final var head = queue.peek();
@@ -45,8 +45,8 @@ class FIFOTest {
   @Test
   void testRemovesElementsInOrder() {
     final var queue = new FIFOIntQueue();
-    queue.offer(24);
     queue.offer(42);
+    queue.offer(24);
 
     final var expectedRemoved = 42;
     final var expectedSize = 1;
@@ -65,7 +65,7 @@ class FIFOTest {
     }
     for (int i = 0; i < 50; i++) {
       int head = q.poll(), size = q.size();
-      assertEquals(99 - i, head);
+      assertEquals(i, head);
       assertEquals(99 - i, size);
     }
 
@@ -85,7 +85,7 @@ class FIFOTest {
     int m = Math.min(n / 2, M);
     for (int i = 0; i < m; i++) {
       int head = q.poll(), size = q.size();
-      assertEquals(m - 1 - i, head);
+      assertEquals(i, head);
       assertEquals(m - 1 - i, size);
     }
 
@@ -105,7 +105,7 @@ class FIFOTest {
     int m = Math.min(n / 2, M);
     for (int i = 0; i < m; i++) {
       int head = q.poll(), size = q.size();
-      assertEquals(m - 1 - i, head);
+      assertEquals(i, head);
       assertEquals(m - 1 - i, size);
     }
 
