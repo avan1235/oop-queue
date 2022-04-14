@@ -40,7 +40,4 @@ public class IntQueueNode {
   public void setNext(IntQueueNode n) {
     this.next = n;
   }
-
-  // TODO: make changes with this class fields, constructors, methods -
-  //  this is just a helper class for your implementation that can be modified as you wish
 }
