@@ -1,39 +1,69 @@
 package pl.edu.mimuw.queue;
 
 public abstract class AbstractIntQueue {
+  protected IntQueueNode front;
+  protected IntQueueNode rear;
+  protected int size;
+  protected int maxCapacity;
 
-  // TODO: you can make changes with this class fields, constructors
-  //  but also add some methods but the specified methods cannot be changed (you
-  //  can change them not to be abstract and provide some implementation for them,
-  //  but they have to have the same names, arguments and returned values)
+  public AbstractIntQueue(int firstVal) {
+    this();
+    this.rear = this.front = new IntQueueNode(firstVal, null, null);
+  }
 
-  /**
-   * Adds element to the queue.
-   *
-   * @throws NullPointerException if the specified element is null
-   */
-  public abstract void offer(Integer x);
+  public AbstractIntQueue(int firstVal, int maxCapacity) {
+    this(firstVal);
+    this.maxCapacity = maxCapacity;
+  }
 
-  /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and don't remove the element from the queue
-   */
-  public abstract Integer peek();
+  public AbstractIntQueue() {
+    this.maxCapacity = Integer.MAX_VALUE;
+  }
 
-  /**
-   * @return the head of this queue, or {@code null} if this queue is empty
-   * and remove the element from the queue
-   */
-  public abstract Integer poll();
+  public void offer(Integer x)//abstrakcja dodania peirwszego elementu kolejki wspólnego dla oobu rodzajów
+  {
+    this.rear = this.front = new IntQueueNode(x, null, null);
+    this.size = 1;
+  }
 
-  /**
-   * @return readable representation of ordered queue elements
-   */
+  public Integer peek() {
+    if (this.front == null) return null;
+    return this.front.getValue();
+  }
+
+  public Integer poll() {
+    if (this.front == null) return null;
+    Integer res = this.front.getValue();
+    this.front = this.front.getNext();
+    this.size--;
+    return res;
+  }
+
+  public IntQueueNode getFront() {
+    return this.front;
+  }
+
+  public IntQueueNode getRear() {
+    return this.rear;
+  }
+
   @Override
-  public abstract String toString();
+  public String toString()//abstrakcja wspólnej części budowy stringa dla obu (drukwoania samej listy)
+  {
+    var sb = new StringBuilder();
+    var tempNode = this.front;
+    while (tempNode != null) {
+      sb.append(tempNode.getValue());
+      tempNode = tempNode.getNext();
+    }
+    return sb.toString();
+  }
 
-  /**
-   * @return the number of elements in this queue
-   */
-  public abstract int size();
+  public int size() {
+    return this.size;
+  }
+
+  public boolean empty() {
+    return this.size == 0;
+  }
 }
