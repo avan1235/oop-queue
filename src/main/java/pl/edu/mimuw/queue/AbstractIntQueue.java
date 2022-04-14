@@ -1,58 +1,69 @@
 package pl.edu.mimuw.queue;
 
-import java.util.LinkedList;
-
 public abstract class AbstractIntQueue {
-  protected LinkedList<IntQueueNode> nodes;
+  protected IntQueueNode front;
+  protected IntQueueNode rear;
+  protected int size;
   protected int maxCapacity;
 
-  public AbstractIntQueue(int firstVal)
-  {
+  public AbstractIntQueue(int firstVal) {
     this();
-    this.nodes.add(new IntQueueNode(firstVal,null,null));
+    this.rear = this.front = new IntQueueNode(firstVal, null, null);
   }
 
-  public AbstractIntQueue(int firstVal,int maxCapacity)
-  {
-    this();
-    this.nodes.add(new IntQueueNode(firstVal,null,null));
-    this.maxCapacity=maxCapacity;
+  public AbstractIntQueue(int firstVal, int maxCapacity) {
+    this(firstVal);
+    this.maxCapacity = maxCapacity;
   }
 
-  public AbstractIntQueue()
-  {
-    this.nodes=new LinkedList<>();
-    this.maxCapacity=Integer.MAX_VALUE;
+  public AbstractIntQueue() {
+    this.maxCapacity = Integer.MAX_VALUE;
   }
 
-  public abstract void offer(Integer x);
-
-  public Integer peek()
+  public void offer(Integer x)//abstrakcja dodania peirwszego elementu kolejki wspólnego dla oobu rodzajów
   {
-    if(this.nodes==null||this.nodes.size()==0)return null;
-    Integer res;
-    res=this.nodes.get(0).getValue();
+    this.rear = this.front = new IntQueueNode(x, null, null);
+    this.size = 1;
+  }
+
+  public Integer peek() {
+    if (this.front == null) return null;
+    return this.front.getValue();
+  }
+
+  public Integer poll() {
+    if (this.front == null) return null;
+    Integer res = this.front.getValue();
+    this.front = this.front.getNext();
+    this.size--;
     return res;
   }
 
-  public Integer poll()
-  {
-    if(this.nodes==null||this.nodes.size()==0)return null;
-    Integer res=this.nodes.get(0).getValue();
-    this.nodes.remove(0);
-    return res;
+  public IntQueueNode getFront() {
+    return this.front;
+  }
+
+  public IntQueueNode getRear() {
+    return this.rear;
   }
 
   @Override
-  public abstract String toString();
-
-  public int size()
+  public String toString()//abstrakcja wspólnej części budowy stringa dla obu (drukwoania samej listy)
   {
-    return this.nodes.size();
+    var sb = new StringBuilder();
+    var tempNode = this.front;
+    while (tempNode != null) {
+      sb.append(tempNode.getValue());
+      tempNode = tempNode.getNext();
+    }
+    return sb.toString();
   }
 
-  public boolean empty()
-  {
-    return this.nodes.size()==0;
+  public int size() {
+    return this.size;
+  }
+
+  public boolean empty() {
+    return this.size == 0;
   }
 }

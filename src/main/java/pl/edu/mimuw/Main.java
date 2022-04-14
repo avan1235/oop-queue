@@ -13,7 +13,7 @@ public class Main {
     int n = scanner.nextInt();
     var s = new FIFOIntQueue();
     var q = new LIFOIntQueue();
-    for (int i = 1; i < n; i++) {
+    for (int i = 0; i < n; i++) {
       s.offer(i);
       q.offer(i);
     }
@@ -31,8 +31,8 @@ public class Main {
     System.out.println("Stack size=" + s.size());
     System.out.println("Queue size=" + q.size());
 
-    while (!s.empty()) s.poll();
-    while (!q.empty()) q.poll();
+    while (!s.empty()){System.out.println("S not empty"); s.poll();}
+    while (!q.empty()) {System.out.println("Q not empty"); q.poll();}
     System.out.println(s.empty() && q.empty());
     System.out.println("Stack size=" + s.size());
     System.out.println("Queue size=" + q.size());

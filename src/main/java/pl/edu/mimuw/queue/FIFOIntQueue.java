@@ -16,20 +16,21 @@ public class FIFOIntQueue extends AbstractIntQueue {
 
   @Override
   public void offer(Integer x) {
-    if (this.nodes.size() == 0) {
-      this.nodes.add(new IntQueueNode(x, null, null));
-    } else if (this.nodes.size() < this.maxCapacity) this.nodes.add(0, new IntQueueNode(x, this.nodes.get(0), null));
+    if (this.size == 0) super.offer(x);//wykorzystanie wspólnego działania dla przypadku dodawania pierwszego elementu
+    else if (this.size < this.maxCapacity) {
+      var newNode = new IntQueueNode(x, this.front, null);
+      this.front.setPrev(newNode);
+      this.front = newNode;
+      this.size++;
+    }
   }
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    if (this.nodes == null || this.nodes.size() == 0) sb.append("Queue type: FIFO, queue empty");
+    var sb = new StringBuilder();
+    if (this.size == 0) sb.append("Queue type: FIFO, queue empty");
     else {
-      sb.append("Queue type: FIFO,").append("queue size: ").append(this.nodes.size()).append(" values: ");
-      for (var node : nodes) {
-        sb.append(node.getValue()).append(" ");
-      }
+      sb.append("Queue type: FIFO,").append("queue size: ").append(this.size).append(" values: ").append(super.toString());//wykorzystanie abstrakcji toString() wartości na liście
     }
     return sb.toString();
   }

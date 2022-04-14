@@ -3,8 +3,8 @@ package pl.edu.mimuw.queue;
 public class IntQueueNode {
 
   private final int value;
-  private final IntQueueNode next;
-  private final IntQueueNode prev;
+  protected IntQueueNode next;
+  protected IntQueueNode prev;
 
   public IntQueueNode(int value, IntQueueNode next, IntQueueNode prev) {
     this.value = value;
@@ -17,16 +17,25 @@ public class IntQueueNode {
   }
 
   public IntQueueNode getNext() {
-    if (next == null) return null;
-    return new IntQueueNode(next.getValue());
+    //if (next == null) return null;
+    return next;
+  }
+
+  public void setNext(IntQueueNode newNode) {
+    this.next = newNode;
   }
 
   public IntQueueNode getPrev() {
     if (prev == null) return null;
-    return new IntQueueNode(prev.getValue());
+    return prev;
+  }
+
+  public void setPrev(IntQueueNode newNode) {
+    this.prev = newNode;
   }
 
   public IntQueueNode(int value) {
     this(value, null, null);
   }
 }
+
